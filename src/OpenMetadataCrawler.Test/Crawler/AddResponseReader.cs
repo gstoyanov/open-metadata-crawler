@@ -23,7 +23,7 @@ namespace OpenMetadataCrawler.Test
                 .Returns( this.webResponseMock.Object );
 
             webRequestFactoryMock
-                .Setup( f => f.Create( TestUri ) )
+                .Setup( f => f.Create( It.IsAny<Uri>() ) )
                 .Returns( this.webRequstMock.Object );
 
             this.crawler = new Crawler( webRequestFactoryMock.Object );
