@@ -1,0 +1,24 @@
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+bin
+obj
+
+# Visual Studio files
+*.suo
+*.user
+*.cache
+
+# Resharper files
+_ReSharper*
+
+# NuGet
+packages/
+
+# vim files
+*.swp
+*~
+
+# mstest test results
+TestResults
+
+# Windows image file caches
+Thumbs.db
