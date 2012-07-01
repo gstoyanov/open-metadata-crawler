@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IWebRequest.cs" />
+    <Compile Include="Common\IWebResponse.cs" />
+    <Compile Include="Common\WebRequestFactory.cs" />
+    <Compile Include="Common\WebRequestWrapper.cs" />
+    <Compile Include="Common\WebResponseWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
