@@ -77,15 +77,38 @@ namespace OpenMetadataCrawler
             IWebRequest request = this.webRequestFactory.Create( uri );
             IWebResponse response = request.GetResponse();
 
+            var results = new List<MetadataItem>();
+
             foreach ( IResponseReader reader in this.responseReaders )
             {
                 if ( reader.CanRead( response ) )
                 {
-                    reader.Read( response );
+                    IEnumerable<MetadataItem> readerResults = reader.Read( response );
+                    CollectItems( results, readerResults );
                 }
             }
 
-            return null;
+            return results;
+        }
+
+        private static void CollectItems(
+            List<MetadataItem> results,
+            IEnumerable<MetadataItem> readerResults )
+        {
+            if ( readerResults == null )
+            {
+                return;
+            }
+
+            foreach ( MetadataItem newItem in readerResults )
+            {
+                // names are unique and older items take precedence
+                bool exists = results.Exists( m => m.Name == newItem.Name );
+                if ( !exists )
+                {
+                    results.Add( newItem );
+                }
+            }
         }
     }
 }

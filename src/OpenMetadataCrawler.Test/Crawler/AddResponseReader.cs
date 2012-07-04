@@ -7,35 +7,16 @@ using NUnit.Framework;
 namespace OpenMetadataCrawler.Test
 {
     [TestFixture]
-    public class AddResponseReader
+    public class AddResponseReader : CrawlerTest
     {
-        [SetUp]
-        public void TestInit()
-        {
-            this.readers = new List<Mock<IResponseReader>>();
-
-            this.webRequstMock = new Mock<IWebRequest>();
-            this.webResponseMock = new Mock<IWebResponse>();
-            var webRequestFactoryMock = new Mock<WebRequestFactory>();
-
-            this.webRequstMock
-                .Setup( wr => wr.GetResponse() )
-                .Returns( this.webResponseMock.Object );
-
-            webRequestFactoryMock
-                .Setup( f => f.Create( It.IsAny<Uri>() ) )
-                .Returns( this.webRequstMock.Object );
-
-            this.crawler = new Crawler( webRequestFactoryMock.Object );
-        }
-
-        private const string TestUri = "http://example.com";
-
-        private Crawler crawler;
-        private Mock<IWebRequest> webRequstMock;
-        private Mock<IWebResponse> webResponseMock;
-
         private List<Mock<IResponseReader>> readers;
+
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            readers = new List<Mock<IResponseReader>>();
+        }
 
         private void AddReader( bool? canRead = null )
         {
