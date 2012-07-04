@@ -8,7 +8,7 @@ namespace OpenMetadataCrawler
     /// <summary>
     /// An interface for the web response object.
     /// </summary>
-    public interface IWebResponse
+    public interface IWebResponse : IDisposable
     {
         /// <summary>
         /// Gets a value indicating whether this response was obtained from the

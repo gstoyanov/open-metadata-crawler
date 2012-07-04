@@ -114,5 +114,13 @@ namespace OpenMetadataCrawler.Test
             metadata.Should().BeEquivalentTo(
                 this.sampleResults1.Concat( this.sampleResults2 ) );
         }
+
+        [Test]
+        public void WebResponseWrapperIsDisposed()
+        {
+            this.crawler.GetRaw( TestUri );
+
+            this.webResponseMock.Verify( r => r.Dispose(), Times.Once() );
+        }
     }
 }

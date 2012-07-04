@@ -4,7 +4,7 @@ using System.Net;
 
 namespace OpenMetadataCrawler
 {
-    internal sealed class WebResponseWrapper : IWebResponse, IDisposable
+    internal sealed class WebResponseWrapper : IWebResponse
     {
         private readonly HttpWebResponse httpWebResponse;
         private MemoryStream responseStreamCopy;
@@ -165,6 +165,8 @@ namespace OpenMetadataCrawler
             {
                 this.responseStreamCopy.Dispose();
             }
+            
+            this.httpWebResponse.Close();
         }
     }
 }

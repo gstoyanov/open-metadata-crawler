@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace OpenMetadataCrawler
@@ -26,11 +25,6 @@ namespace OpenMetadataCrawler
             }
         }
 
-        [SuppressMessage(
-            "Microsoft.Reliability",
-            "CA2000:Dispose objects before losing scope",
-            Justification = @"The client of the web request is supposed to use
-            the response object and then dispose it." )]
         public IWebResponse GetResponse()
         {
             WebResponse response = this.webRequest.GetResponse();

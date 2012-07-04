@@ -75,20 +75,21 @@ namespace OpenMetadataCrawler
         public IEnumerable<MetadataItem> GetRaw( Uri uri )
         {
             IWebRequest request = this.webRequestFactory.Create( uri );
-            IWebResponse response = request.GetResponse();
-
-            var results = new List<MetadataItem>();
-
-            foreach ( IResponseReader reader in this.responseReaders )
+            using ( IWebResponse response = request.GetResponse() )
             {
-                if ( reader.CanRead( response ) )
-                {
-                    IEnumerable<MetadataItem> readerResults = reader.Read( response );
-                    CollectItems( results, readerResults );
-                }
-            }
+                var results = new List<MetadataItem>();
 
-            return results;
+                foreach ( IResponseReader reader in this.responseReaders )
+                {
+                    if ( reader.CanRead( response ) )
+                    {
+                        IEnumerable<MetadataItem> readerResults = reader.Read( response );
+                        CollectItems( results, readerResults );
+                    }
+                }
+
+                return results;
+            }
         }
 
         private static void CollectItems(
